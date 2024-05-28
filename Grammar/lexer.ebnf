@@ -1,0 +1,32 @@
+program	= { statement };
+
+statement = variable_declaration | function_declaration ;
+
+variable_declaration = [ option_var ], [ modifier_var ], type identifier, [ assignement ], ';' ;
+
+assignement = '=', expression ;
+
+option_var =	'const' | 'static' ;
+
+modifier_var = 'let' | 'var' ;
+
+type =	'bite'	
+		|	'char'
+		|	'int'
+		|	'float'
+		|	'double'
+		|	'bool'
+		|	'str'
+		|	'void' ;
+
+identifier = ["a-zA-Z0-9"] ;
+
+function_declaration = "func", [ option_func ], "->", type, identifier, '(', [ parameters ], ')', block_function ;
+
+option_func = 'static' ;
+
+parameters = type, identifier, [ ',', parameters | "..."] ;
+
+block_function = '{', [ statement_func ], '}' ;
+
+statement_func = variable_declaration | if_statement | while_statement | return_statement ;
