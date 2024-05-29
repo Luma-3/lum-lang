@@ -6,11 +6,21 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:03:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/29 02:05:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/29 05:18:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_HPP
 # define LEXER_HPP
+
+enum class TokenType {
+	FUNC,
+	
+}
+
+class Lexer
+{
+	
+};
 
 # endif
