@@ -1,6 +1,6 @@
 
 // Fonction format: retourne le caractère 'c' si nb est égal à 1, sinon retourne '0'
-func -> char format(int nb, char c) 
+func -> format(int nb, char c) : char
 {
 	// Vérifie si nb est égal à 1
 	if (nb == 1) {
@@ -18,11 +18,21 @@ func -> char param(int a, int& b, int* c)
 	c = &b // passage par pointeur
 }
 
+char
+str
+int
+long
+float
+double
+bool
+void
+
 
 // Verifier de nullite
 char value = null;
 
 value? = c;
+valut? return;
 
 // Generic
 
@@ -36,6 +46,11 @@ func -> void main() {
     let int_result = add<int>(3, 4);          // Utilise la fonction avec des entiers
     print(int_result);                        // Affiche 7
 
-    let float_result = add<float>(3.5, 2.1);  // Utilise la fonction avec des flottants
+	volatile int float_result = add<float>(3.5, 2.1);
+		   // Utilise la fonction avec des flottants
     print(float_result);   	                  // Affiche 5.6
+}
+
+namespace std.math.vector {
+
 }

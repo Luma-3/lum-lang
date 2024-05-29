@@ -1,0 +1,57 @@
+program	= { statement };
+
+namespace = 'namespace', identifier, '{', [ statement ], '}' ;
+
+statement = namespace | variable_declaration | function_declaration ;
+
+variable_declaration = [ option_var ], type, identifier, [ assignement ], ';' ;
+
+assignement = '=', expression ;
+
+option_var =	'const' | 'static' ;
+
+type =		'var'
+		|	'char'
+		|	'int'
+		|	'float'
+		|	'double'
+		|	'bool'
+		|	'str'
+		|	'void' ;
+
+function_declaration = "func", [ option_func ], "->", identifier, '(', [ parameters ], ')', [':', type ], block_function ;
+
+option_func = 'static' ;
+
+parameters = type, identifier, [ ',', parameters | "..."] ;
+
+block_function = '{', [ statement_block ], '}' ;
+
+statement_block = variable_declaration | if_statement | while_statement | return_statement | expression, ';' ;
+
+if_statement = 'if', '(', expression, ')', block_function, ['else if', '(', expression, ')', block_function ], [ 'else', block_function ] ;
+
+while_statement = 'while', '(', expression, ')', block_function ;
+
+return_statement = 'return', '(', [ expression ], ')', ';' ;
+
+expression = [ unary_operator ], primary_expression, [ binary_operator, primary_expression ] ;
+
+unary_operator = '!', '-' ;
+
+binary_operator = '+' | '-' | '*' | '/' | '%' | '==' | '!=' | '<' | '<=' | '>' | '>=' | '&&' | '||' ;
+
+primary_expression = identifier | number | string | '(', expression, ')' ;
+
+(* Low level id *)
+identifier = letter, { letter | digit | '_' } ;
+
+string = '"', { letter | digit | ' ' | '_' | 'ASCII' }, '"' ;
+
+(* Low level number *)
+
+number = digit, { digit } ;
+
+letter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' ;
+
+digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' ;
