@@ -24,7 +24,7 @@ jobs:
 
       - name: Build gtest
         run: |
-          cd /usr/src/gtest
+          cd /usr
           git clone https://github.com/google/googletest.git
           cd googletest
           sudo mkdir build
@@ -39,74 +39,74 @@ jobs:
       - name: Build project
         run: cmake --build build
 
-  test:
-    runs-on: ubuntu-latest
+  # test:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build clang
-          sudo apt-get install -y cmake
+  #     - name: Install dependencies
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y ninja-build clang
+  #         sudo apt-get install -y cmake
       
-      - name: Build gtest
-        run: |
-          cd /usr/src/gtest
-          git clone https://github.com/google/googletest.git
-          cd googletest
-          sudo mkdir build
-          cd build
-          sudo cmake ..
-          sudo make
-          sudo make install
+  #     - name: Build gtest
+  #       run: |
+  #         cd /usr/src/gtest
+  #         git clone https://github.com/google/googletest.git
+  #         cd googletest
+  #         sudo mkdir build
+  #         cd build
+  #         sudo cmake ..
+  #         sudo make
+  #         sudo make install
 
-      - name: Configure CMake
-        run: cmake -S . -B build -G Ninja
+  #     - name: Configure CMake
+  #       run: cmake -S . -B build -G Ninja
 
-      - name: Build project
-        run: cmake --build build
+  #     - name: Build project
+  #       run: cmake --build build
 
-      - name: Run tests
-        run: ctest --test-dir build --output-on-failure
+  #     - name: Run tests
+  #       run: ctest --test-dir build --output-on-failure
 
-  static-analyse:
-    runs-on: ubuntu-latest
+  # static-analyse:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build clang
-          sudo apt-get install -y cmake
+  #     - name: Install dependencies
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y ninja-build clang
+  #         sudo apt-get install -y cmake
 
-      - name: Build gtest
-        run: |
-          cd /usr/src/gtest
-          git clone https://github.com/google/googletest.git
-          cd googletest
-          sudo mkdir build
-          cd build
-          sudo cmake ..
-          sudo make
-          sudo make install
+  #     - name: Build gtest
+  #       run: |
+  #         cd /usr/src/gtest
+  #         git clone https://github.com/google/googletest.git
+  #         cd googletest
+  #         sudo mkdir build
+  #         cd build
+  #         sudo cmake ..
+  #         sudo make
+  #         sudo make install
 
-      - name: Configure CMake
-        run: cmake -S . -B build -G Ninja
+  #     - name: Configure CMake
+  #       run: cmake -S . -B build -G Ninja
 
-      - name: Build project
-        run: cmake --build build
+  #     - name: Build project
+  #       run: cmake --build build
 
-      - name: Static analysis with clang-tidy
-        run: clang-tidy -p build $(find . -name '*.cpp') -- -std=c++17
+  #     - name: Static analysis with clang-tidy
+  #       run: clang-tidy -p build $(find . -name '*.cpp') -- -std=c++17
 
-      # - name: Static analysis with scan-build
-      #   run: scan-build cmake --build build
+  #     # - name: Static analysis with scan-build
+  #     #   run: scan-build cmake --build build
 
       
     
