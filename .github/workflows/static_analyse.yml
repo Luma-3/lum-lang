@@ -26,9 +26,11 @@ jobs:
       - name: Build gtest
         run: |
           cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
+          mkdir build
+          cd build
+          sudo cmake ..
           sudo make
-          sudo cp *.a /usr/lib
+          sudo make install
 
       - name: Configure CMake
         run: cmake -S . -B build -G Ninja
@@ -53,9 +55,11 @@ jobs:
       - name: Build gtest
         run: |
           cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
+          mkdir build
+          cd build
+          sudo cmake ..
           sudo make
-          sudo cp *.a /usr/lib
+          sudo make install
 
       - name: Configure CMake
         run: cmake -S . -B build -G Ninja
@@ -83,9 +87,11 @@ jobs:
       - name: Build gtest
         run: |
           cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
+          mkdir build
+          cd build
+          sudo cmake ..
           sudo make
-          sudo cp *.a /usr/lib
+          sudo make install
 
       - name: Configure CMake
         run: cmake -S . -B build -G Ninja
