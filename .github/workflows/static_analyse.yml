@@ -20,6 +20,15 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build clang
+          sudo apt-get install -y libgtest-dev
+          sudo apt-get install -y cmake
+
+      - name: Build gtest
+        run: |
+          cd /usr/src/gtest
+          sudo cmake CMakeLists.txt
+          sudo make
+          sudo cp *.a /usr/lib
 
       - name: Configure CMake
         run: cmake -S . -B build -G Ninja
@@ -37,7 +46,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build clang googletest
+          sudo apt-get install -y cmake ninja-build clang
+          sudo apt-get install -y libgtest-dev
+          sudo apt-get install -y cmake
+      
+      - name: Build gtest
+        run: |
+          cd /usr/src/gtest
+          sudo cmake CMakeLists.txt
+          sudo make
+          sudo cp *.a /usr/lib
 
       - name: Configure CMake
         run: cmake -S . -B build -G Ninja
@@ -58,7 +76,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build clang clang-tidy
+          sudo apt-get install -y cmake ninja-build clang
+          sudo apt-get install -y libgtest-dev
+          sudo apt-get install -y cmake
+
+      - name: Build gtest
+        run: |
+          cd /usr/src/gtest
+          sudo cmake CMakeLists.txt
+          sudo make
+          sudo cp *.a /usr/lib
 
       - name: Configure CMake
         run: cmake -S . -B build -G Ninja
