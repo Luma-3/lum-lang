@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 21:09:54 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/30 22:49:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/01 00:12:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ TEST(FileManagerTest, getExtension)
 TEST(FileManagerTest, openFile)
 {
 	FileManager fileManager;
+	ifstream file1;
+	ifstream file2;
 
-	EXPECT_EQ(fileManager.OpenFile("../../tests/test.lum").is_open(), true);
-	EXPECT_EQ(fileManager.OpenFile("../../tests/test.txt").is_open(), false);
+	EXPECT_EQ(fileManager.OpenFile("../../tests/test.lum", file1), true);
+	EXPECT_EQ(fileManager.OpenFile("../../tests/test.txt", file2), false);
 }
 
 TEST(FileManagerTest, getNbFiles)
