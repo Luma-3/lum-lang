@@ -19,13 +19,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build clang
-          sudo apt-get install -y libgtest-dev
+          sudo apt-get install -y ninja-build clang
           sudo apt-get install -y cmake
 
       - name: Build gtest
         run: |
           cd /usr/src/gtest
+          git clone https://github.com/google/googletest.git
+          cd googletest
           sudo mkdir build
           cd build
           sudo cmake ..
@@ -48,13 +49,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build clang
-          sudo apt-get install -y libgtest-dev
+          sudo apt-get install -y ninja-build clang
           sudo apt-get install -y cmake
       
       - name: Build gtest
         run: |
           cd /usr/src/gtest
+          git clone https://github.com/google/googletest.git
+          cd googletest
           sudo mkdir build
           cd build
           sudo cmake ..
@@ -80,13 +82,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build clang
-          sudo apt-get install -y libgtest-dev
+          sudo apt-get install -y ninja-build clang
           sudo apt-get install -y cmake
 
       - name: Build gtest
         run: |
           cd /usr/src/gtest
+          git clone https://github.com/google/googletest.git
+          cd googletest
           sudo mkdir build
           cd build
           sudo cmake ..
