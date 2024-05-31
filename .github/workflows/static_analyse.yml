@@ -103,10 +103,12 @@ jobs:
         run: cmake --build build
 
       - name: Static analysis with clang-tidy
-        run: clang-tidy -p build $(find . -name '*.cpp') -- -std=c++17
+        run: |
+            cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B build
+            clang-tidy -p=./build/compile_commands.json $(find ./sources -name '*.cpp')
 
-      # - name: Static analysis with scan-build
-      #   run: scan-build cmake --build build
+      - name: Static analysis with scan-build
+        run: scan-build cmake --build build
 
       
     
