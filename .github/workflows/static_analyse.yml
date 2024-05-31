@@ -26,7 +26,7 @@ jobs:
       - name: Build gtest
         run: |
           cd /usr/src/gtest
-          mkdir build
+          sudo mkdir build
           cd build
           sudo cmake ..
           sudo make
@@ -55,7 +55,7 @@ jobs:
       - name: Build gtest
         run: |
           cd /usr/src/gtest
-          mkdir build
+          sudo mkdir build
           cd build
           sudo cmake ..
           sudo make
@@ -87,7 +87,7 @@ jobs:
       - name: Build gtest
         run: |
           cd /usr/src/gtest
-          mkdir build
+          sudo mkdir build
           cd build
           sudo cmake ..
           sudo make
