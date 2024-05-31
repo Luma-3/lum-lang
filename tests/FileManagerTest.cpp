@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 21:09:54 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/29 23:21:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:49:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ TEST(FileManagerTest, addFile)
 {
 	FileManager fileManager;
 
-	EXPECT_EQ(fileManager.addFile("test.lum"), 0);
-	EXPECT_EQ(fileManager.addFile("test.txt"), 1);
+	EXPECT_EQ(fileManager.AddFile("test.lum"), 0);
+	EXPECT_EQ(fileManager.AddFile("test.txt"), 1);
 }
 
 TEST(FileManagerTest, getFile)
 {
 	FileManager fileManager;
 
-	fileManager.addFile("test.lum");
+	fileManager.AddFile("test.lum");
 	EXPECT_EQ(fileManager.getFile(0), "test.lum");
 	EXPECT_EQ(fileManager.getFile(1), "");
 }
@@ -35,9 +35,9 @@ TEST(FileManagerTest, removeFile)
 {
 	FileManager fileManager;
 
-	fileManager.addFile("test.lum");
+	fileManager.AddFile("test.lum");
 	EXPECT_EQ(fileManager.getFile(0), "test.lum");
-	fileManager.removeFile(0);
+	fileManager.RemoveFile(0);
 	EXPECT_EQ(fileManager.getFile(0), "");
 }
 
@@ -53,8 +53,8 @@ TEST(FileManagerTest, openFile)
 {
 	FileManager fileManager;
 
-	EXPECT_EQ(fileManager.openFile("../../tests/test.lum").is_open(), true);
-	EXPECT_EQ(fileManager.openFile("../../tests/test.txt").is_open(), false);
+	EXPECT_EQ(fileManager.OpenFile("../../tests/test.lum").is_open(), true);
+	EXPECT_EQ(fileManager.OpenFile("../../tests/test.txt").is_open(), false);
 }
 
 TEST(FileManagerTest, getNbFiles)
@@ -62,7 +62,7 @@ TEST(FileManagerTest, getNbFiles)
 	FileManager fileManager;
 
 	EXPECT_EQ(fileManager.getNbFiles(), 0);
-	fileManager.addFile("test.lum");
+	fileManager.AddFile("test.lum");
 	EXPECT_EQ(fileManager.getNbFiles(), 1);
 }
 

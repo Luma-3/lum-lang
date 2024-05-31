@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/luma/Documents/Project_Perso/lum-lang/build",
+  "command": "/usr/bin/c++  -I/home/luma/Documents/Project_Perso/lum-lang/includes  -Wall -Wextra -Werror -Wpedantic -g3 -O3  -g -std=gnu++11 -o CMakeFiles/LumLang.dir/sources/FileManager.cpp.o -c /home/luma/Documents/Project_Perso/lum-lang/sources/FileManager.cpp",
+  "file": "/home/luma/Documents/Project_Perso/lum-lang/sources/FileManager.cpp"
+},
+{
+  "directory": "/home/luma/Documents/Project_Perso/lum-lang/build",
+  "command": "/usr/bin/c++  -I/home/luma/Documents/Project_Perso/lum-lang/includes  -Wall -Wextra -Werror -Wpedantic -g3 -O3  -g -std=gnu++11 -o CMakeFiles/LumLang.dir/sources/main.cpp.o -c /home/luma/Documents/Project_Perso/lum-lang/sources/main.cpp",
+  "file": "/home/luma/Documents/Project_Perso/lum-lang/sources/main.cpp"
+},
+{
+  "directory": "/home/luma/Documents/Project_Perso/lum-lang/build/tests",
+  "command": "/usr/bin/c++  -I/home/luma/Documents/Project_Perso/lum-lang/includes  -Wall -Wextra -Werror -Wpedantic -g3 -O3  -g -std=gnu++14 -o CMakeFiles/FileManagerTest.dir/__/sources/FileManager.cpp.o -c /home/luma/Documents/Project_Perso/lum-lang/sources/FileManager.cpp",
+  "file": "/home/luma/Documents/Project_Perso/lum-lang/sources/FileManager.cpp"
+},
+{
+  "directory": "/home/luma/Documents/Project_Perso/lum-lang/build/tests",
+  "command": "/usr/bin/c++  -I/home/luma/Documents/Project_Perso/lum-lang/includes  -Wall -Wextra -Werror -Wpedantic -g3 -O3  -g -std=gnu++14 -o CMakeFiles/FileManagerTest.dir/FileManagerTest.cpp.o -c /home/luma/Documents/Project_Perso/lum-lang/tests/FileManagerTest.cpp",
+  "file": "/home/luma/Documents/Project_Perso/lum-lang/tests/FileManagerTest.cpp"
+}
+]

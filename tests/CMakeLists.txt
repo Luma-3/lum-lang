@@ -15,6 +15,6 @@ target_link_libraries(FileManagerTest ${GTEST_LIBRARIES} pthread )
 
 add_test(
 	NAME FileManagerTest
-	COMMAND FileManagerTest
+	COMMAND ./FileManagerTest
 )
 

@@ -1,0 +1,42 @@
+Checks: |
+  # Basic checks
+  readability-*
+  modernize-*
+  bugprone-*
+  performance-*
+  misc-*
+  # Selective checks to avoid being overwhelming
+  cppcoreguidelines-*
+  -cppcoreguidelines-pro-type-vararg
+  -cppcoreguidelines-owning-memory
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic
+  -cppcoreguidelines-no-malloc
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay
+  -cppcoreguidelines-special-member-functions
+  -cppcoreguidelines-pro-type-reinterpret-cast
+  -cppcoreguidelines-pro-type-cstyle-cast
+  # Google style guide checks
+  google-*
+  -google-runtime-int
+  -google-build-using-namespace
+  # Optional clang-analyzer checks
+  clang-analyzer-*
+
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false
+FormatStyle: none
+User: ''
+CheckOptions:
+  - key:             readability-identifier-naming.VariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.FunctionCase
+    value:           camelBack
+  - key:             modernize-use-auto
+    value:           false
+  - key:             modernize-use-nullptr
+    value:           true
+  - key:             modernize-use-override
+    value:           true
+  - key:             modernize-use-equals-default
+    value:           true
