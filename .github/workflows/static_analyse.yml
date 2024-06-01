@@ -1,84 +1,78 @@
-name: static analyse
+name: Static analysis
 
 on:
   push:
-    branches:
-      - '**'
+    branches: |
+      [main]
+      [DEV]
   pull_request:
-    branches:
-      - '**'
+    branches: |
+      [main]
+      [DEV]
 
 jobs:
 
-  test:
+  clang-tidy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/apt-dependencies.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
 
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build clang
-          sudo apt-get install -y cmake
-      
-      - name: Build gtest
-        run: |
-          cd /usr
-          sudo git clone https://github.com/google/googletest.git
-          cd googletest
-          sudo mkdir build
-          cd build
-          sudo cmake ..
-          sudo make
-          sudo make install
+          sudo apt-get install -y cmake ninja-build 
+          sudo apt-get install -y clang
 
       - name: Configure CMake
         run: cmake -S . -B build -G Ninja
 
       - name: Build project
-        run: cmake --build build
+        run: cmake ENABLE_DEBUG=ON --build build
 
-      - name: Run tests
-        run: ctest --test-dir build --output-on-failure
-
-  static-analyse:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build clang clang-tools
-          sudo apt-get install -y cmake
-
-      - name: Build gtest
-        run: |
-          cd /usr
-          sudo git clone https://github.com/google/googletest.git
-          cd googletest
-          sudo mkdir build
-          cd build
-          sudo cmake ..
-          sudo make
-          sudo make install
-
-      - name: Configure CMake
-        run: cmake -S . -B build -G Ninja
-
-      - name: Build project
-        run: cmake --build build
-
-      - name: Static analysis with clang-tidy
+      - name: Clang-tidy Analysis
         run: |
             cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B build
             clang-tidy -p=./build/compile_commands.json $(find ./sources -name '*.cpp')
 
-      - name: Static analysis with scan-build
+  scan-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/apt-dependencies.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build 
+          sudo apt-get install -y clang
+          sudo apt-get install -y clang-tools
+
+      - name: Configure CMake
+        run: cmake -S . -B build -G Ninja
+
+      - name: Build project
+        run: cmake ENABLE_DEBUG=ON --build build
+
+      - name: Scan-build Analysis
         run: scan-build cmake --build build
 
       

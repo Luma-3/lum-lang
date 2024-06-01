@@ -1,0 +1,65 @@
+name: Unit tests
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/apt-dependencies.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
+      - name: Update and install apt dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build 
+          sudo apt-get install -y clang
+      
+      - name: Cache CMake files
+        uses: actions/cache@v4
+        with:
+          path: |
+            build
+            /usr/local/include/gtest
+            /usr/local/lib/libgtest*.a
+          key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-cmake-
+      
+      - name: Build gtest
+        run: |
+          if [ ! -d "/usr/local/include/gtest" ]; then
+            cd /usr
+            sudo git clone https://github.com/google/googletest.git
+            cd googletest
+            sudo mkdir build
+            cd build
+            sudo cmake ..
+            sudo make
+            sudo make install
+          fi
+        shell: bash
+
+      - name: Configure CMake
+        run: cmake -S . -B build -G Ninja
+
+      - name: Build project
+        run: cmake ENABLE_TESTS=ON --build build
+
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure
