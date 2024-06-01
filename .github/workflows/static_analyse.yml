@@ -37,7 +37,7 @@ jobs:
         run: cmake -S . -B build -G Ninja -DENABLE_DEBUG=ON
 
       - name: Build project
-        run: cmake ENABLE_DEBUG=ON --build build
+        run: cmake --build build
 
       - name: Clang-tidy Analysis
         run: |
