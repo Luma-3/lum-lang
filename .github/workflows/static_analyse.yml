@@ -2,13 +2,13 @@ name: Static analysis
 
 on:
   push:
-    branches: |
-      [main]
-      [DEV]
+    branches: 
+      - main
+      - DEV
   pull_request:
-    branches: |
-      [main]
-      [DEV]
+    branches:
+      - main
+      - DEV
 
 jobs:
 
@@ -34,7 +34,7 @@ jobs:
           sudo apt-get install -y clang
 
       - name: Configure CMake
-        run: cmake -S . -B build -G Ninja
+        run: cmake -S . -B build -G Ninja -DENABLE_DEBUG=ON
 
       - name: Build project
         run: cmake ENABLE_DEBUG=ON --build build
@@ -67,10 +67,10 @@ jobs:
           sudo apt-get install -y clang-tools
 
       - name: Configure CMake
-        run: cmake -S . -B build -G Ninja
+        run: cmake -S . -B build -G Ninja -DENABLE_DEBUG=ON
 
       - name: Build project
-        run: cmake ENABLE_DEBUG=ON --build build
+        run: cmake --build build
 
       - name: Scan-build Analysis
         run: scan-build cmake --build build

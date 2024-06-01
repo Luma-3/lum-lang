@@ -56,10 +56,10 @@ jobs:
         shell: bash
 
       - name: Configure CMake
-        run: cmake -S . -B build -G Ninja
+        run: cmake -S . -B build -G Ninja -DENABLE_TESTS=ON
 
       - name: Build project
-        run: cmake ENABLE_TESTS=ON --build build
+        run: cmake --build build
 
       - name: Run tests
         run: ctest --test-dir build --output-on-failure
