@@ -1,0 +1,63 @@
+name: Compile
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  compile:
+      runs-on: ubuntu-latest
+    
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Cache apt packages
+        uses: actions/cache@v2
+        with:
+          path: /var/cache/apt
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/apt-dependencies.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+    
+      - name: Update and install apt dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build clang
+          sudo apt-get install -y cmake
+        shell: bash
+    
+      - name: Cache CMake files
+        uses: actions/cache@v2
+        with:
+          path: |
+            build
+            /usr/local/include/gtest
+            /usr/local/lib/libgtest*.a
+          key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-cmake-
+    
+      - name: Build gtest
+        run: |
+          if [ ! -d "/usr/local/include/gtest" ]; then
+            cd /usr
+            sudo git clone https://github.com/google/googletest.git
+            cd googletest
+            sudo mkdir build
+            cd build
+            sudo cmake ..
+            sudo make
+            sudo make install
+          fi
+        shell: bash
+    
+      - name: Configure CMake
+        run: cmake -S . -B build -G Ninja
+    
+      - name: Build project
+        run: cmake --build build

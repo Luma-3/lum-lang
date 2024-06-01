@@ -9,35 +9,6 @@ on:
       - '**'
 
 jobs:
-  compile:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build clang
-          sudo apt-get install -y cmake
-
-      - name: Build gtest
-        run: |
-          cd /usr
-          sudo git clone https://github.com/google/googletest.git
-          cd googletest
-          sudo mkdir build
-          cd build
-          sudo cmake ..
-          sudo make
-          sudo make install
-
-      - name: Configure CMake
-        run: cmake -S . -B build -G Ninja
-
-      - name: Build project
-        run: cmake --build build
 
   test:
     runs-on: ubuntu-latest
