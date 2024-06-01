@@ -41,7 +41,7 @@ unary_operator = '!', '-' ;
 
 binary_operator = '+' | '-' | '*' | '/' | '%' | '==' | '!=' | '<' | '<=' | '>' | '>=' | '&&' | '||' ;
 
-primary_expression = identifier | number | string | '(', expression, ')' ;
+primary_expression = identifier | number | string | '(', [ expression ], [ { ',', expression } ] ')' ;
 
 (* Low level id *)
 identifier = letter, { letter | digit | '_' } ;
