@@ -1,3 +1,11 @@
+/*
+ * Filename: /home/luma/Documents/Project_Perso/lum-lang/.gitignore
+ * Path: /home/luma/Documents/Project_Perso/lum-lang
+ * Created Date: Monday, June 3rd 2024, 12:05:06 am
+ * Author: Jean-Baptiste Brousse
+ * 
+ * Copyright (c) 2024 Your Company
+ */
 # Prerequisites
 *.d
 
@@ -30,4 +38,11 @@
 *.exe
 *.out
 *.app
+
+# Build files
+
 build/
+
+# EBNF visualisation
+
+node_modules/
