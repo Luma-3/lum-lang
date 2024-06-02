@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 1st June 2024 5:50:01 pm                          */
+/* Last Modified: Sunday, 2nd June 2024 11:51:05 pm                           */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -20,7 +20,7 @@
 /* ************************************************************************** */
 
 
-#include <FileManager.hpp>
+#include "FileManager.hpp"
 
 using std::string;
 using std::cout;
@@ -37,53 +37,54 @@ string FileManager::getExtension(string const &filename)
 	return (filename.substr(pos));
 }
 
-int FileManager::AddFile(string const &filename)
+void FileManager::AddFile(string const &filename)
 {
 	if (getExtension(filename) != ".lum")
 	{
-		cerr << "Error: file must be a .lum file" << endl;
-		return (1);
+		throw std::invalid_argument("file " + getExtension(filename) + " is not support");
 	}
-	_files.push_back(filename);
-	return (0);
+	_filePaths.push_back(filename);
 }
 
 void FileManager::RemoveFile(size_t index)
 {
-	if (index >= _files.size())
+	if (index >= _filePaths.size())
 	{
-		cerr << "Error: index out of range" << endl;
-		return ;
+		throw std::out_of_range("Invalid index");
 	}
-	_files.erase(_files.begin() + static_cast<int64_t>(index));
+	_filePaths.erase(_filePaths.begin() + static_cast<int64_t>(index));
+	
 }
 
-bool FileManager::OpenFile(string const &filename, ifstream &file)
-{	
-	file.open(filename);
-	try {
-		if (!file.is_open())
-		{
-			throw "Error: could not open file";
-		}
-	} catch (const char *e) {
-		cerr << e << endl;
-		return (false);
-	}
-	return (true);
-}
-
-string FileManager::getFile(size_t index) const
+string FileManager::getFilePath(size_t index) const
 {
-	if (index >= _files.size())
+	if (index >= _filePaths.size())
 	{
-		cerr << "Error: index out of range" << endl;
-		return ("");
+		throw std::out_of_range("Invalid index");
 	}
-	return (_files[index]);
+	return (_filePaths[index]);
+}
+
+string FileManager::readFile(size_t index) const
+{
+	string file_path;
+
+	file_path = getFilePath(index);
+	ifstream file(file_path, std::ios::binary | std::ios::ate);
+	if (!file.is_open()) {
+		throw std::runtime_error("Unable to open file");
+	}
+	std::streamsize size = file.tellg();
+	file.seekg(0, std::ios::beg);
+	
+	string buffer(size, '\0');
+	file.read(&buffer[0], size);
+	file.close();
+
+	return (buffer);
 }
 
 size_t FileManager::getNbFiles() const
 {
-	return (_files.size());
+	return (_filePaths.size());
 }

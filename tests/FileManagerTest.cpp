@@ -18,17 +18,9 @@ TEST(FileManagerTest, addFile)
 {
 	FileManager fileManager;
 
-	EXPECT_EQ(fileManager.AddFile("test.lum"), 0);
-	EXPECT_EQ(fileManager.AddFile("test.txt"), 1);
-}
-
-TEST(FileManagerTest, getFile)
-{
-	FileManager fileManager;
-
 	fileManager.AddFile("test.lum");
-	EXPECT_EQ(fileManager.getFile(0), "test.lum");
-	EXPECT_EQ(fileManager.getFile(1), "");
+	ASSERT_EQ(fileManager.getFilePath(0), "test.lum");
+	ASSERT_THROW(fileManager.AddFile("test.txt"), std::invalid_argument);
 }
 
 TEST(FileManagerTest, removeFile)
@@ -36,9 +28,9 @@ TEST(FileManagerTest, removeFile)
 	FileManager fileManager;
 
 	fileManager.AddFile("test.lum");
-	EXPECT_EQ(fileManager.getFile(0), "test.lum");
+	EXPECT_EQ(fileManager.getFilePath(0), "test.lum");
 	fileManager.RemoveFile(0);
-	EXPECT_EQ(fileManager.getFile(0), "");
+	EXPECT_THROW(fileManager.getFilePath(0), std::out_of_range);
 }
 
 TEST(FileManagerTest, getExtension)
@@ -49,14 +41,15 @@ TEST(FileManagerTest, getExtension)
 	EXPECT_EQ(fileManager.getExtension("test.txt"), ".txt");
 }
 
-TEST(FileManagerTest, openFile)
+TEST(FileManagerTest, readFile)
 {
 	FileManager fileManager;
-	ifstream file1;
-	ifstream file2;
 
-	EXPECT_EQ(fileManager.OpenFile("../../tests/test.lum", file1), true);
-	EXPECT_EQ(fileManager.OpenFile("../../tests/test.txt", file2), false);
+	fileManager.AddFile("../../tests/test.lum");
+	EXPECT_EQ(fileManager.readFile(0), "test.lum");
+	EXPECT_THROW(fileManager.readFile(1), std::out_of_range);
+	fileManager.AddFile("test.lum"); // Invalid file
+	EXPECT_THROW(fileManager.readFile(1), std::runtime_error);
 }
 
 TEST(FileManagerTest, getNbFiles)

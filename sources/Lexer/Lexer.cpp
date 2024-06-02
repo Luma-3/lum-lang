@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/* Project: lum-lang    |   File: main.cpp                                    */
-/* Path: /sources/main.cpp                                                    */
+/* Project: lum-lang    |   File: Lexer.cpp                                   */
+/* Path: /sources/Lexer.cpp                                                   */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* File Created: Wednesday, 29th May 2024 5:33:11 pm                          */
+/* File Created: Saturday, 1st June 2024 11:18:20 pm                          */
 /* Author: Jean-Baptiste Brousse (jb.brs@icloud.com)                          */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 11:57:30 pm                           */
+/* Last Modified: Sunday, 2nd June 2024 11:58:08 pm                           */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -19,35 +19,24 @@
 /* License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html          */
 /* ************************************************************************** */
 
+#include "Lexer.hpp"
 
-#include <FileManager.hpp>
+using std::regex;
+using std::smatch;
 
-using std::string;
-using std::cout;
-using std::cerr;
-using std::endl;
 
-int main(int argc, char **argv)
+void	Lexer::Tokenize(string file)
 {
-	string filename = "";
-	FileManager fileManager;
-	
-	if (argc < 2)
-	{
-		cerr << "Error: no file provided" << endl;
-		return (1);
-	}
-	filename = argv[1];
-	try
-	{
-		fileManager.AddFile(filename);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
-	cout << "File added: " << fileManager.readFile(0) << endl;
+	(void)file;
+	throw std::runtime_error("Not implemented");
+}
 
-	return (0);
+string	Lexer::ReadToken()
+{
+	throw std::runtime_error("Not implemented");
+}
+
+vector<string>	Lexer::getErrors()
+{
+	throw std::runtime_error("Not implemented");
 }

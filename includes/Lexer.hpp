@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/* Project: lum-lang    |   File: main.cpp                                    */
-/* Path: /sources/main.cpp                                                    */
+/* Project: lum-lang    |   File: Lexer.hpp                                   */
+/* Path: /includes/Lexer.hpp                                                  */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* File Created: Wednesday, 29th May 2024 5:33:11 pm                          */
+/* File Created: Saturday, 1st June 2024 11:18:38 pm                          */
 /* Author: Jean-Baptiste Brousse (jb.brs@icloud.com)                          */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 11:57:30 pm                           */
+/* Last Modified: Sunday, 2nd June 2024 11:56:31 pm                           */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -19,35 +19,45 @@
 /* License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html          */
 /* ************************************************************************** */
 
+#ifndef LEXER_HPP
+# define LEXER_HPP
 
-#include <FileManager.hpp>
+#include <regex>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <stdexcept>
 
+#include "Token.hpp"
+#include "Error.hpp"
+
+using std::vector;
 using std::string;
-using std::cout;
-using std::cerr;
-using std::endl;
+using std::ifstream;
 
-int main(int argc, char **argv)
+#define Tregex_number "[0-9]+(\\.[0-9]+)?"
+#define Tregex_str "[0-9]*[a-z]*[A-Z]*"
+
+class Lexer
 {
-	string filename = "";
-	FileManager fileManager;
-	
-	if (argc < 2)
-	{
-		cerr << "Error: no file provided" << endl;
-		return (1);
-	}
-	filename = argv[1];
-	try
-	{
-		fileManager.AddFile(filename);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
-	cout << "File added: " << fileManager.readFile(0) << endl;
+private:
+	ifstream file;
+	size_t	_position;
+	size_t	_colNumber;
+	size_t	_lineNumber;
+	vector<Token> _tokens;
+	vector<Error> _errors;
 
-	return (0);
-}
+public:
+	Lexer() : _position(0), _colNumber(0), _lineNumber(0) {};
+	~Lexer() = default;
+
+	void			Tokenize(string file);
+	string			ReadToken();
+	
+	vector<string>	getErrors();
+};
+
+
+
+#endif

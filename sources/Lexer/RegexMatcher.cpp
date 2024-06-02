@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/* Project: lum-lang    |   File: main.cpp                                    */
-/* Path: /sources/main.cpp                                                    */
+/* Project: lum-lang    |   File: RegexMatcher.cpp                            */
+/* Path: /sources/Lexer/RegexMatcher.cpp                                      */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* File Created: Wednesday, 29th May 2024 5:33:11 pm                          */
+/* File Created: Sunday, 2nd June 2024 7:50:56 pm                             */
 /* Author: Jean-Baptiste Brousse (jb.brs@icloud.com)                          */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 11:57:30 pm                           */
+/* Last Modified: Sunday, 2nd June 2024 7:51:08 pm                            */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -19,35 +19,5 @@
 /* License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html          */
 /* ************************************************************************** */
 
+#include "Lexer.hpp"
 
-#include <FileManager.hpp>
-
-using std::string;
-using std::cout;
-using std::cerr;
-using std::endl;
-
-int main(int argc, char **argv)
-{
-	string filename = "";
-	FileManager fileManager;
-	
-	if (argc < 2)
-	{
-		cerr << "Error: no file provided" << endl;
-		return (1);
-	}
-	filename = argv[1];
-	try
-	{
-		fileManager.AddFile(filename);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
-	cout << "File added: " << fileManager.readFile(0) << endl;
-
-	return (0);
-}

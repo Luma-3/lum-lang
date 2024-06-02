@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 1st June 2024 5:49:54 pm                          */
+/* Last Modified: Sunday, 2nd June 2024 11:33:31 pm                           */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -35,17 +35,17 @@ class FileManager
 {
 	
 private:
-	vector<string> _files;
+	vector<string> _filePaths;
 
 public:
 	FileManager() = default;
     ~FileManager() = default;
 
-	int			AddFile(string const &filename);
+	void		AddFile(string const &filename);
 	void		RemoveFile(size_t index);
-	bool 		OpenFile(string const &filename, ifstream &file);
+	string		readFile(size_t index) const;
 
-	string		getFile(size_t index) const;
+	string		getFilePath(size_t index) const;
 	string		getExtension(string const &filename);
 	size_t		getNbFiles() const;
 };

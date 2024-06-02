@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/* Project: lum-lang    |   File: main.cpp                                    */
-/* Path: /sources/main.cpp                                                    */
+/* Project: lum-lang    |   File: Error.hpp                                   */
+/* Path: /includes/Error.hpp                                                  */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* File Created: Wednesday, 29th May 2024 5:33:11 pm                          */
+/* File Created: Sunday, 2nd June 2024 3:15:27 pm                             */
 /* Author: Jean-Baptiste Brousse (jb.brs@icloud.com)                          */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 11:57:30 pm                           */
+/* Last Modified: Sunday, 2nd June 2024 6:32:39 pm                            */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -19,35 +19,45 @@
 /* License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html          */
 /* ************************************************************************** */
 
+#ifndef ERROR_HPP
+# define ERROR_HPP
 
-#include <FileManager.hpp>
+#include <map>
+#include <string>
 
+using std::map;
 using std::string;
-using std::cout;
-using std::cerr;
-using std::endl;
 
-int main(int argc, char **argv)
+enum	e_errType
 {
-	string filename = "";
-	FileManager fileManager;
-	
-	if (argc < 2)
-	{
-		cerr << "Error: no file provided" << endl;
-		return (1);
-	}
-	filename = argv[1];
-	try
-	{
-		fileManager.AddFile(filename);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
-	cout << "File added: " << fileManager.readFile(0) << endl;
+	errLex_illChar,
+	errLex_undifineExp,
+	errLex_invNumFormat
+};
 
-	return (0);
-}
+class Error
+{
+public:
+
+	Error(e_errType type, string ctx, size_t ln, size_t col)
+		: _type(type), _context(ctx), _ln(ln), _col(col) {}
+	~Error() = default;
+
+	string			getColum() const;
+	string			getLine() const;
+	string			getContext() const;
+	
+	string			getValue(const string &key) const;
+
+	static string	FormatError(Error error);
+
+private:
+
+	static const map<e_errType, string> errorMessage;
+	const e_errType	_type;
+	const string	_context;
+	const size_t	_ln;
+	const size_t	_col;
+};
+
+#endif
