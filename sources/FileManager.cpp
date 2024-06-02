@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 11:51:05 pm                           */
+/* Last Modified: Monday, 3rd June 2024 12:31:13 am                           */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -60,7 +60,7 @@ string FileManager::getFilePath(size_t index) const
 {
 	if (index >= _filePaths.size())
 	{
-		throw std::out_of_range("Invalid index");
+		throw std::out_of_range("Invalid index " + std::to_string(index) + " >= " + std::to_string(_filePaths.size()));
 	}
 	return (_filePaths[index]);
 }
@@ -68,8 +68,12 @@ string FileManager::getFilePath(size_t index) const
 string FileManager::readFile(size_t index) const
 {
 	string file_path;
-
-	file_path = getFilePath(index);
+	
+	try {
+		file_path = getFilePath(index);
+	} catch (const std::out_of_range& e) {
+		throw std::runtime_error("Read file index: " + std::string(e.what()));
+	}
 	ifstream file(file_path, std::ios::binary | std::ios::ate);
 	if (!file.is_open()) {
 		throw std::runtime_error("Unable to open file");

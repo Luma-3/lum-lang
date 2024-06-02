@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 11:57:30 pm                           */
+/* Last Modified: Monday, 3rd June 2024 12:33:23 am                           */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -29,7 +29,7 @@ using std::endl;
 
 int main(int argc, char **argv)
 {
-	string filename = "";
+	string filename;
 	FileManager fileManager;
 	
 	if (argc < 2)
@@ -38,13 +38,12 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	filename = argv[1];
-	try
-	{
+	try {
 		fileManager.AddFile(filename);
 	}
-	catch(const std::exception& e)
-	{
+	catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
+		return (1);
 	}
 	
 	cout << "File added: " << fileManager.readFile(0) << endl;
