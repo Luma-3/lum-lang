@@ -2,6 +2,8 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/includes)
 
+enable_testing()
+
 set(SRC_FILEMANAGER
 	${SOURCE_DIR}/FileManager.cpp
 	FileManagerTest.cpp

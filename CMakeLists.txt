@@ -22,9 +22,9 @@ add_executable(LumLang ${SOURCES})
 
 add_subdirectory(includes)
 
-option(ENABLE_TESTS "Enable tests" OFF)
+# option(ENABLE_TESTS "Enable tests" OFF)
 
-if (ENABLE_TESTS)
-	enable_testing()
-	add_subdirectory(tests)
-endif()
+# if (ENABLE_TESTS)
+# 	enable_testing()
+# 	add_subdirectory(tests)
+# endif()

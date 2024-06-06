@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 6:32:39 pm                            */
+/* Last Modified: Thursday, 6th June 2024 11:25:44 pm                         */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -32,7 +32,8 @@ enum	e_errType
 {
 	errLex_illChar,
 	errLex_undifineExp,
-	errLex_invNumFormat
+	errLex_invNumFormat,
+	errLex_invIdentifier
 };
 
 class Error

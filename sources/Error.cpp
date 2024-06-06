@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 6:36:34 pm                            */
+/* Last Modified: Thursday, 6th June 2024 11:27:03 pm                         */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -28,8 +28,9 @@ using std::smatch;
 
 const map<e_errType, string> Error::errorMessage = {
 	{errLex_illChar, "Illegal character '{ctx}' at line {ln}, column {col}."},
-	{errLex_undifineExp, "Undefined expression '{ctx}' start at line {ln}, column {col}."},
-	{errLex_invNumFormat, "Invalid number format '{ctx}' at line {ln}, column {col}."}
+	{errLex_undifineExp, "Undefined expression '{ctx}' start at line {ln}, column {col}. Expected a valid expression."},
+	{errLex_invNumFormat, "Invalid number format '{ctx}' at line {ln}, column {col}. Number must be followed by a whitespace or an operator."},
+	{errLex_invIdentifier, "Invalid identifier '{ctx}' at line {ln}, column {col}. Identifier must start with a letter or an underscore."}
 };
 
 string	Error::getColum() const

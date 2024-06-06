@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 21:09:54 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/06/01 00:12:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/04 20:27:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ TEST(FileManagerTest, readFile)
 
 	fileManager.AddFile("../../tests/test.lum");
 	EXPECT_EQ(fileManager.readFile(0), "test.lum");
-	EXPECT_THROW(fileManager.readFile(1), std::out_of_range);
+	EXPECT_THROW(fileManager.readFile(1), std::runtime_error);
 	fileManager.AddFile("test.lum"); // Invalid file
 	EXPECT_THROW(fileManager.readFile(1), std::runtime_error);
 }

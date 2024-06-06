@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 11:56:31 pm                           */
+/* Last Modified: Thursday, 6th June 2024 11:14:56 pm                         */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -34,30 +34,56 @@
 using std::vector;
 using std::string;
 using std::ifstream;
+using std::regex;
 
 #define Tregex_number "[0-9]+(\\.[0-9]+)?"
-#define Tregex_str "[0-9]*[a-z]*[A-Z]*"
+#define Tregex_identifier "[a-zA-Z_][a-zA-Z0-9_]*"
+#define Tregex_whitespace "[ \t\n]+"
+
+#define ERROR -1
+#define FOUND 1
+#define NOT_FOUND 0
 
 class Lexer
 {
 private:
-	ifstream file;
+	// File to tokenize
+	string	_file;
+	
+	// Position in the file
 	size_t	_position;
 	size_t	_colNumber;
 	size_t	_lineNumber;
+
+	// Token and Error vectors
 	vector<Token> _tokens;
 	vector<Error> _errors;
 
+	// Cache for regex matches
+	std::smatch _currentMatch;
+
+	// Generic regex matcher
+	bool	matchRegex(regex &regex);
+	
+	// Regex matchers
+	int		matchNumber(void);
+	int		matchIdentifier(void);
+	int		matchWhitespace(void);
+	
+	void	updatePosition(const string &matched);
+	void 	addToken(e_TokenType type, string data);
+	int		tryMatch();
+
 public:
-	Lexer() : _position(0), _colNumber(0), _lineNumber(0) {};
+	Lexer(string file) : _file(file), _position(0), _colNumber(1), _lineNumber(1) {};
 	~Lexer() = default;
 
-	void			Tokenize(string file);
-	string			ReadToken();
+	void			Tokenize(void);
+	vector<Error>	getErrors() const;
 	
-	vector<string>	getErrors();
+	// DEBUG METHODS //
+	void			ReadToken();
+	void			readError();
 };
-
-
 
 #endif

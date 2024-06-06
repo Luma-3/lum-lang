@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 1st June 2024 9:36:04 pm                          */
+/* Last Modified: Thursday, 6th June 2024 5:56:19 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -23,7 +23,7 @@
 
 using std::string;
 
-Token::Token(e_type type, string data)
+Token::Token(e_TokenType type, string data)
 {
 	_type = type;
 	_data = data;
@@ -34,7 +34,7 @@ string	Token::getData()
 	return (_data);
 }
 
-e_type	Token::getType()
+e_TokenType	Token::getType()
 {
 	return (_type);
 }

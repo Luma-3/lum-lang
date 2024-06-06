@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
-/* Project: lum-lang    |   File: main.cpp                                    */
-/* Path: /sources/main.cpp                                                    */
-/* -------------------------------------------------------------------------- */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: Invalid date        by brs@icloud.       #+#    #+#             */
+/*   Updated: 2024/06/04 21:41:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
-/* File Created: Wednesday, 29th May 2024 5:33:11 pm                          */
-/* Author: Jean-Baptiste Brousse (jb.brs@icloud.com)                          */
-/* Aka: jbrousse | Luma-3                                                     */
-/*                                                                            */
-/* -------------------------------------------------------------------------- */
-/*                                                                            */
+/* ************************************************************************** */
+
 /* Last Modified: Monday, 3rd June 2024 12:33:23 am                           */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
@@ -21,6 +21,7 @@
 
 
 #include <FileManager.hpp>
+#include <Lexer.hpp>
 
 using std::string;
 using std::cout;
@@ -45,8 +46,9 @@ int main(int argc, char **argv)
 		std::cerr << e.what() << '\n';
 		return (1);
 	}
-	
-	cout << "File added: " << fileManager.readFile(0) << endl;
-
+	Lexer lexer(fileManager.readFile(0));
+	lexer.Tokenize();
+	lexer.ReadToken();
+	lexer.readError();
 	return (0);
 }
