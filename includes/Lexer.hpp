@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Thursday, 6th June 2024 11:14:56 pm                         */
+/* Last Modified: Friday, 7th June 2024 9:17:33 pm                            */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -39,6 +39,11 @@ using std::regex;
 #define Tregex_number "[0-9]+(\\.[0-9]+)?"
 #define Tregex_identifier "[a-zA-Z_][a-zA-Z0-9_]*"
 #define Tregex_whitespace "[ \t\n]+"
+
+#define Tkeyword_type_var "int:float:char:string:bool"
+#define Tkeyword_type_func "func"
+#define Tkeyword_type_control "if:else:while:for:break:continue:return"
+
 
 #define ERROR -1
 #define FOUND 1
@@ -74,6 +79,10 @@ private:
 	void 	addToken(e_TokenType type, string data);
 	int		tryMatch();
 
+	// Error handlers
+
+	int		invalidNumber(void);
+
 public:
 	Lexer(string file) : _file(file), _position(0), _colNumber(1), _lineNumber(1) {};
 	~Lexer() = default;
@@ -85,5 +94,7 @@ public:
 	void			ReadToken();
 	void			readError();
 };
+
+int		is_valid_number(char c);
 
 #endif

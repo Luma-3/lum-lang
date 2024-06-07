@@ -28,11 +28,12 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
 	string filename;
 	FileManager fileManager;
 	
+	(void)envp; // TODO : Preocess Env for Color and othre little things
 	if (argc < 2)
 	{
 		cerr << "Error: no file provided" << endl;

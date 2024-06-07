@@ -80,7 +80,12 @@ void	Lexer::updatePosition(const string &matched)
 			_colNumber = 1;
 		}
 		else {
-			_colNumber++;
+			if (c == '\t')
+				_colNumber += 4;
+			else if (c == '\r')
+				_colNumber = 1;
+			else
+				_colNumber++;
 		}
 	}
 }
