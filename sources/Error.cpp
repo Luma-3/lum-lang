@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Thursday, 6th June 2024 11:27:03 pm                         */
+/* Last Modified: Saturday, 8th June 2024 2:25:51 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -26,7 +26,7 @@
 using std::regex;
 using std::smatch;
 
-const map<e_errType, string> Error::errorMessage = {
+const map<e_errType, string> Error::ErrorMsgMap = {
 	{errLex_illChar, "Illegal character '{ctx}' at line {ln}, column {col}."},
 	{errLex_undifineExp, "Undefined expression '{ctx}' start at line {ln}, column {col}. Expected a valid expression."},
 	{errLex_invNumFormat, "Invalid number format '{ctx}' at line {ln}, column {col}. Number must be followed by a whitespace or an operator."},
@@ -61,7 +61,7 @@ string Error::FormatError(Error error)
 	regex pattern("\\{\\w+\\}");
 	smatch match;
 
-	string msg = errorMessage.at(error._type);
+	string msg = ErrorMsgMap.at(error._type);
 	
 	while (std::regex_search(msg, match, pattern)) {
 		

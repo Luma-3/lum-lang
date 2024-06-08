@@ -40,11 +40,13 @@ void	Lexer::Tokenize()
 		else if (result == NOT_FOUND) {
 			string ill_char(1, _file[_position]);
 			_errors.push_back(Error(errLex_illChar, ill_char, _lineNumber, _colNumber));
+			_position++;
 			updatePosition(ill_char);
 		}
 		else {
 			_position++;
 		}
+		cout << "Position: " << _position << endl;
 	}
 }
 
@@ -58,7 +60,7 @@ vector<Error>	Lexer::getErrors() const
 int		Lexer::tryMatch()
 {
 	int result;
-	
+
 	if ((result = matchNumber()) != NOT_FOUND) {
 		return (result);
 	}
@@ -66,6 +68,9 @@ int		Lexer::tryMatch()
 		return (result);
 	}
 	if ((result = matchWhitespace()) != NOT_FOUND) {
+		return (result);
+	}
+	if ((result = matchString()) != NOT_FOUND) {
 		return (result);
 	}
 	return (NOT_FOUND);

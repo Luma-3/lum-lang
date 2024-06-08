@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Thursday, 6th June 2024 11:25:44 pm                         */
+/* Last Modified: Saturday, 8th June 2024 2:25:51 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -54,7 +54,7 @@ public:
 
 private:
 
-	static const map<e_errType, string> errorMessage;
+	static const map<e_errType, string> ErrorMsgMap;
 	const e_errType	_type;
 	const string	_context;
 	const size_t	_ln;

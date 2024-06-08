@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Friday, 7th June 2024 9:17:33 pm                            */
+/* Last Modified: Saturday, 8th June 2024 2:32:52 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -35,15 +35,6 @@ using std::vector;
 using std::string;
 using std::ifstream;
 using std::regex;
-
-#define Tregex_number "[0-9]+(\\.[0-9]+)?"
-#define Tregex_identifier "[a-zA-Z_][a-zA-Z0-9_]*"
-#define Tregex_whitespace "[ \t\n]+"
-
-#define Tkeyword_type_var "int:float:char:string:bool"
-#define Tkeyword_type_func "func"
-#define Tkeyword_type_control "if:else:while:for:break:continue:return"
-
 
 #define ERROR -1
 #define FOUND 1
@@ -74,6 +65,7 @@ private:
 	int		matchNumber(void);
 	int		matchIdentifier(void);
 	int		matchWhitespace(void);
+	int		matchString(void);
 	
 	void	updatePosition(const string &matched);
 	void 	addToken(e_TokenType type, string data);

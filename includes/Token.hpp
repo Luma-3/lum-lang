@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Thursday, 6th June 2024 9:06:09 pm                          */
+/* Last Modified: Saturday, 8th June 2024 2:27:17 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -24,23 +24,24 @@
 # define TOKEN_HPP
 
 #include <string>
+#include <map>
 
 using std::string;
+using std::map;
 
 enum e_TokenType
 {
-	struct_type,
-	end_struct,
-	option,
-	delimiter,
-	type,
 	identifier,
 	number,
 	str,
-	un_op,
-	bin_op,
-	assign,
 	whitespace
+};
+
+const map<e_TokenType, string> TokenRegexes = {
+	{identifier, "[a-zA-Z_][a-zA-Z0-9_]*"},
+	{number, "[0-9]+(\\.[0-9]+)?"},
+	{str, "\"[^\"]*\""},
+	{whitespace, "[ \t\n]+"}
 };
 
 class Token
