@@ -1,56 +1,11 @@
-
-// Fonction format: retourne le caractère 'c' si nb est égal à 1, sinon retourne '0'
-func -> format(int nb, char c) : char
+func -> main (void) : int
 {
-	// Vérifie si nb est égal à 1
-	if (nb == 1) {
-		// Retourne le caractère c si la condition est vraie
-		return (c);
-	}
-	// Retourne '0' si la condition est fausse
-	return ('0');
-}
+	print("Hello, World!");
+} 
 
-func -> char param(int a, int& b, int* c)
+/* func -> operator (int a, int b) : int
 {
-	a = a+1; //passage par copy
-	b = a // passahe par referance
-	c = &b // passage par pointeur
-}
-
-char
-str
-int
-long
-float
-double
-bool
-void
-
-
-// Verifier de nullite
-char value = null;
-
-value? = c;
-valut? return;
-
-// Generic
-
-// Fonction générique utilisant la contrainte de type Addable
-func <T: Addable> -> T add(T a, T b) {
-    return a.add(b);
-}
-
-// Utilisation de la fonction générique
-func -> void main() {
-    let int_result = add<int>(3, 4);          // Utilise la fonction avec des entiers
-    print(int_result);                        // Affiche 7
-
-	volatile int float_result = add<float>(3.5, 2.1);
-		   // Utilise la fonction avec des flottants
-    print(float_result);   	                  // Affiche 5.6
-}
-
-namespace std.math.vector {
-
-}
+	if (a == 0)
+		return b++;
+	return a + b;
+} */

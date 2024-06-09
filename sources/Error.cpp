@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 8th June 2024 2:25:51 pm                          */
+/* Last Modified: Sunday, 9th June 2024 7:02:33 pm                            */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -30,7 +30,10 @@ const map<e_errType, string> Error::ErrorMsgMap = {
 	{errLex_illChar, "Illegal character '{ctx}' at line {ln}, column {col}."},
 	{errLex_undifineExp, "Undefined expression '{ctx}' start at line {ln}, column {col}. Expected a valid expression."},
 	{errLex_invNumFormat, "Invalid number format '{ctx}' at line {ln}, column {col}. Number must be followed by a whitespace or an operator."},
-	{errLex_invIdentifier, "Invalid identifier '{ctx}' at line {ln}, column {col}. Identifier must start with a letter or an underscore."}
+	{errLex_invIdentifier, "Invalid identifier '{ctx}' at line {ln}, column {col}. Identifier must start with a letter or an underscore."},
+	{errLex_stringNotClosed, "String not closed '{ctx}' at line {ln}, column {col}. String must be closed with a double quote."},
+	{errLex_charNotClosed, "Character not closed '{ctx}' at line {ln}, column {col}. Character must be closed with a single quote."},
+	{errLex_longCommentNotClosed, "Long comment not closed '{ctx}' at line {ln}, column {col}. Comment must be closed by '*/'."},
 };
 
 string	Error::getColum() const

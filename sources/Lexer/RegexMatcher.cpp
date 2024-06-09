@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 8th June 2024 4:14:12 pm                          */
+/* Last Modified: Sunday, 9th June 2024 7:04:43 pm                            */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -45,14 +45,21 @@ int		Lexer::matchNumber(void)
 
 int		Lexer::matchString(void)
 {
-	regex str(TokenRegexes.at(e_TokenType::str));
-	if (matchRegex(str))
+	if (_file[_position] == '"')
 	{
-		addToken(e_TokenType::str, _currentMatch.str());
-		updatePosition(_currentMatch.str());
-		return (FOUND);
+		regex str(TokenRegexes.at(e_TokenType::str));
+		if (matchRegex(str))
+		{
+			addToken(e_TokenType::str, _currentMatch.str());
+			updatePosition(_currentMatch.str());
+			return (FOUND);
+		}
+		else
+		{	string ill_char(1, _file[_position]);
+			_errors.push_back(Error(errLex_stringNotClosed, ill_char, _lineNumber, _colNumber));
+			return (ERROR);
+		}
 	}
-	// std::cout << "String not found" << std::endl;
 	return (NOT_FOUND);
 }
 
@@ -61,7 +68,13 @@ int		Lexer::matchIdentifier(void)
 	regex identifier(TokenRegexes.at(e_TokenType::identifier));
 	if (matchRegex(identifier))
 	{
-		addToken(e_TokenType::identifier, _currentMatch.str());
+		if (matchKeyword(_currentMatch.str())) {
+			addToken(e_TokenType::keyword, _currentMatch.str());
+		}
+		else
+		{
+			addToken(e_TokenType::identifier, _currentMatch.str());
+		}
 		updatePosition(_currentMatch.str());
 		return (FOUND);
 	}
@@ -79,7 +92,28 @@ int		Lexer::matchWhitespace(void)
 	return (NOT_FOUND);
 }
 
-bool	Lexer::matchRegex(regex &regex)
+int		Lexer::matchChar(void)
+{
+	if (_file[_position] == '\'')
+	{
+		regex char_(TokenRegexes.at(e_TokenType::char_));
+		if (matchRegex(char_))
+		{
+			addToken(e_TokenType::char_, _currentMatch.str());
+			updatePosition(_currentMatch.str());
+			return (FOUND);
+		}
+		else
+		{
+			string ill_char(1, _file[_position]);
+			_errors.push_back(Error(errLex_charNotClosed, ill_char, _lineNumber, _colNumber));
+			return (ERROR);
+		}
+	}
+	return (NOT_FOUND);
+}
+
+bool	Lexer::matchRegex(const regex &regex)
 {
 	if (std::regex_search(
 		_file.cbegin() + _position,

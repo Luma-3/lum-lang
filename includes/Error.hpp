@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 8th June 2024 2:25:51 pm                          */
+/* Last Modified: Sunday, 9th June 2024 7:02:44 pm                            */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -33,7 +33,10 @@ enum	e_errType
 	errLex_illChar,
 	errLex_undifineExp,
 	errLex_invNumFormat,
-	errLex_invIdentifier
+	errLex_invIdentifier,
+	errLex_stringNotClosed,
+	errLex_charNotClosed,
+	errLex_longCommentNotClosed
 };
 
 class Error

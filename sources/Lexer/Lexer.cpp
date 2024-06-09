@@ -21,11 +21,13 @@
 
 #include "Lexer.hpp"
 #include <iostream>
+#include <iomanip>
 
 using std::regex;
 using std::smatch;
 using std::cout;
 using std::endl;
+using std::setw;
 
 // PUBLIC METHODS //
 
@@ -46,7 +48,6 @@ void	Lexer::Tokenize()
 		else {
 			_position++;
 		}
-		cout << "Position: " << _position << endl;
 	}
 }
 
@@ -61,16 +62,28 @@ int		Lexer::tryMatch()
 {
 	int result;
 
+	if ((result = matchComment()) != NOT_FOUND) {
+		return (result);
+	}
+	if ((result = matchWhitespace()) != NOT_FOUND) {
+		return (result);
+	}
+	if ((result = matchChar()) != NOT_FOUND) {
+		return (result);
+	}
+	if ((result = matchString()) != NOT_FOUND) {
+		return (result);
+	}
 	if ((result = matchNumber()) != NOT_FOUND) {
 		return (result);
 	}
 	if ((result = matchIdentifier()) != NOT_FOUND) {
 		return (result);
 	}
-	if ((result = matchWhitespace()) != NOT_FOUND) {
+	if ((result = matchDelimiter()) != NOT_FOUND) {
 		return (result);
 	}
-	if ((result = matchString()) != NOT_FOUND) {
+	if ((result = matchOperator()) != NOT_FOUND) {
 		return (result);
 	}
 	return (NOT_FOUND);
@@ -102,17 +115,42 @@ void	Lexer::addToken(e_TokenType type, string data)
 
 // DEBUG METHODS //
 
-void	Lexer::ReadToken()
+const map<e_TokenType, string> TokenName = {
+	{e_TokenType::comment, "comment"},
+	{e_TokenType::number, "number"},
+	{e_TokenType::identifier, "identifier"},
+	{e_TokenType::whitespace, "whitespace"},
+	{e_TokenType::char_, "char"},
+	{e_TokenType::str, "str"},
+	{e_TokenType::operator_unary, "operator unary"},
+	{e_TokenType::operator_binary, "operator binary"},
+	{e_TokenType::operator_assignment, "operator assignment"},
+	{e_TokenType::operator_comparison, "operator comparison"},
+	{e_TokenType::operator_logical, "operator logical"},
+	{e_TokenType::operator_bitwise, "operator bitwise"},
+	{e_TokenType::keyword, "keyword"},
+	{e_TokenType::lParen, "lParen"},
+	{e_TokenType::rParen, "rParen"},
+	{e_TokenType::lBrace, "lBrace"},
+	{e_TokenType::rBrace, "rBrace"},
+	{e_TokenType::lBracket, "lBracket"},
+	{e_TokenType::rBracket, "rBracket"},
+	{e_TokenType::semicolon, "semicolon"},
+	{e_TokenType::comma, "comma"},
+	{e_TokenType::arrow, "arrow"},
+	{e_TokenType::colon, "colon"}
+};
+
+
+void Lexer::ReadToken()
 {
-	int	i = 0;
+	int i = 0;
 	for (Token token : _tokens)
 	{
 		i++;
-		cout << "Token " + std::to_string(i) + " | Type: " 
-			+ std::to_string(token.getType()) + " : " + token.getData() + "\n";
+		std::cout << std::left << std::setw(10) << "Token " << setw(4) << i << " | " << std::left << setw(20) << TokenName.at(token.getType()) << " | " << setw(25) << (token.getData().length() >= 25 ? token.getData().substr(0, 24) + "." : token.getData()) << " | " << endl;
 	}
 }
-
 void	Lexer::readError()
 {
 	for (Error error : _errors)

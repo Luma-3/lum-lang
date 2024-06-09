@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 8th June 2024 2:32:52 pm                          */
+/* Last Modified: Sunday, 9th June 2024 7:02:53 pm                            */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -59,13 +59,21 @@ private:
 	std::smatch _currentMatch;
 
 	// Generic regex matcher
-	bool	matchRegex(regex &regex);
+	bool	matchRegex(const regex &regex);
 	
 	// Regex matchers
 	int		matchNumber(void);
 	int		matchIdentifier(void);
 	int		matchWhitespace(void);
 	int		matchString(void);
+	int		matchChar(void);
+
+	// Static matchers
+	bool	matchKeyword(const string &str);
+	bool	matchDelimiter(void);
+	bool	matchOperator(void);
+	bool	matchComment(void);
+	
 	
 	void	updatePosition(const string &matched);
 	void 	addToken(e_TokenType type, string data);
