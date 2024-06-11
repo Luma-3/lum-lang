@@ -1,0 +1,4 @@
+func -> 1name(void) : int
+{
+	return (0);
+}

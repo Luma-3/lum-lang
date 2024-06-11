@@ -50,3 +50,19 @@ add_test(
 	NAME ErrorTest
 	COMMAND ./ErrorTest
 )
+
+
+set(SRC_LEXER
+	${SOURCE_DIR}/Lexer/*.cpp
+	LexerTest.cpp
+)
+
+add_executable(LexerTest ${SRC_LEXER})
+target_include_directories(LexerTest PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+
+target_link_libraries(LexerTest ${GTEST_LIBRARIES} pthread )
+
+add_test(
+	NAME LexerTest
+	COMMAND ./LexerTest
+)

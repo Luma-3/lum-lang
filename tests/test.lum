@@ -1,1 +1,4 @@
-test.lum
+func -> main (void) : int
+{
+	print("Hello, World!");
+} 
