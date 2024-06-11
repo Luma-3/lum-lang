@@ -5,6 +5,7 @@ Project(LumLang)
 set(CMAKE_CXX_STANDARD 11)
 
 option(ENABLE_DEBUG "Enable debug" OFF)
+option(ENABLE_TESTS "Enable tests" OFF)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wpedantic -O3")
 
@@ -22,5 +23,8 @@ add_executable(LumLang ${SOURCES})
 
 add_subdirectory(includes)
 
-enable_testing()
-add_subdirectory(tests)
+
+if(ENABLE_TESTS)
+	enable_testing()
+	add_subdirectory(tests)
+endif()
