@@ -2,8 +2,6 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/includes)
 
-enable_testing()
-
 set(SRC_FILEMANAGER
 	${SOURCE_DIR}/FileManager.cpp
 	FileManagerTest.cpp
@@ -53,7 +51,13 @@ add_test(
 
 
 set(SRC_LEXER
-	${SOURCE_DIR}/Lexer/*.cpp
+	${SOURCE_DIR}/Token.cpp
+	${SOURCE_DIR}/Error.cpp
+	${SOURCE_DIR}/FileManager.cpp
+	${SOURCE_DIR}/Lexer/Lexer.cpp
+	${SOURCE_DIR}/Lexer/LexerErrorUtils.cpp
+	${SOURCE_DIR}/Lexer/RegexMatcher.cpp
+	${SOURCE_DIR}/Lexer/StaticMatcher.cpp
 	LexerTest.cpp
 )
 

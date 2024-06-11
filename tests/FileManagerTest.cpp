@@ -46,7 +46,7 @@ TEST(FileManagerTest, readFile)
 	FileManager fileManager;
 
 	fileManager.AddFile("../../tests/test.lum");
-	EXPECT_EQ(fileManager.readFile(0), "test.lum");
+	EXPECT_EQ(fileManager.readFile(0), "func -> main (void) : int\n{\n\tprint(\"Hello, World!\");\n} ");
 	EXPECT_THROW(fileManager.readFile(1), std::runtime_error);
 	fileManager.AddFile("test.lum"); // Invalid file
 	EXPECT_THROW(fileManager.readFile(1), std::runtime_error);

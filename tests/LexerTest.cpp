@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Tuesday, 11th June 2024 4:43:58 pm                          */
+/* Last Modified: Tuesday, 11th June 2024 7:29:12 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -20,25 +20,32 @@
 /* ************************************************************************** */
 
 #include "Lexer.hpp"
+#include "FileManager.hpp"
 #include <gtest/gtest.h>
 
 TEST(LexerTest, LexerTest_NoErrorsToken_Test)
 {
-	Lexer lexer("test.lum");
+	FileManager file;
+	file.AddFile("../../tests/test.lum");
+	Lexer lexer(file.readFile(0));
 	lexer.Tokenize();
 	EXPECT_EQ(lexer.getErrors().size(), 0);
 }
 
 TEST(LexerTest, LexerTest_WithErrorsToken_Test)
 {
-	Lexer lexer("test_with_error.lum");
+	FileManager file;
+	file.AddFile("../../tests/test_with_error.lum");
+	Lexer lexer(file.readFile(0));
 	lexer.Tokenize();
 	EXPECT_EQ(lexer.getErrors().size(), 1);
 }
 
-Test(LexerTest, LexerTest_Tokenfound_Test)
+TEST(LexerTest, LexerTest_Tokenfound_Test)
 {
-	Lexer lexer("test.lum");
+	FileManager file;
+	file.AddFile("../../tests/test.lum");
+	Lexer lexer(file.readFile(0));
 	lexer.Tokenize();
 	EXPECT_EQ(lexer.getTokens().size(), 15);
 }

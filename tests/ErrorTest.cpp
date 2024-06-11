@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 2nd June 2024 6:37:37 pm                            */
+/* Last Modified: Tuesday, 11th June 2024 7:37:00 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -39,9 +39,9 @@ TEST(ErrorTest, FormatError)
 	Error error(errLex_illChar, "@", 1, 4);
 	EXPECT_EQ(Error::FormatError(error), "Illegal character '@' at line 1, column 4.");
 	Error error2(errLex_undifineExp, "World", 2, 5);
-	EXPECT_EQ(Error::FormatError(error2), "Undefined expression 'World' start at line 2, column 5.");
+	EXPECT_EQ(Error::FormatError(error2), "Undefined expression 'World' start at line 2, column 5. Expected a valid expression.");
 	Error error3(errLex_invNumFormat, "1.2.3", 3, 6);
-	EXPECT_EQ(Error::FormatError(error3), "Invalid number format '1.2.3' at line 3, column 6.");
+	EXPECT_EQ(Error::FormatError(error3), "Invalid number format '1.2.3' at line 3, column 6. Number must be followed by a whitespace or an operator.");
 }
 
 /*main for Unit test of FileManager Class*/

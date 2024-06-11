@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Saturday, 1st June 2024 9:45:36 pm                          */
+/* Last Modified: Tuesday, 11th June 2024 7:27:07 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -25,9 +25,9 @@
 
 TEST(TokenTest, getData)
 {
-	Token token(type, "void");
-	Token token2(type, "int");
-	Token token3(type, "char");
+	Token token(keyword, "void");
+	Token token2(keyword, "int");
+	Token token3(keyword, "char");
 
 	EXPECT_EQ(token.getData(), "void");
 	EXPECT_EQ(token2.getData(), "int");
@@ -36,12 +36,12 @@ TEST(TokenTest, getData)
 
 TEST(TokenTest, getType)
 {
-	Token token(struct_type, "func");
-	Token token2(type, "int");
+	Token token(keyword, "func");
+	Token token2(keyword, "int");
 	Token token3(str, "ouiouibaguettes");
 
-	EXPECT_EQ(token.getType(), struct_type);
-	EXPECT_EQ(token2.getType(), type);
+	EXPECT_EQ(token.getType(), keyword);
+	EXPECT_EQ(token2.getType(), keyword);
 	EXPECT_EQ(token3.getType(), str);
 }
 

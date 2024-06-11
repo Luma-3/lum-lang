@@ -56,6 +56,11 @@ vector<Error>	Lexer::getErrors() const
 	return (_errors);
 }
 
+vector<Token>	Lexer::getTokens() const
+{
+	return (_tokens);
+}
+
 // PRIVATE METHODS //
 
 int		Lexer::tryMatch()

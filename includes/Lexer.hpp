@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* Last Modified: Sunday, 9th June 2024 7:02:53 pm                            */
+/* Last Modified: Tuesday, 11th June 2024 7:29:33 pm                          */
 /* Modified By: Jean-Baptiste Brousse (jb.brs@icloud.com>)                    */
 /* Aka: jbrousse | Luma-3                                                     */
 /*                                                                            */
@@ -89,6 +89,7 @@ public:
 
 	void			Tokenize(void);
 	vector<Error>	getErrors() const;
+	vector<Token>	getTokens() const;
 	
 	// DEBUG METHODS //
 	void			ReadToken();
